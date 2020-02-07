@@ -50,5 +50,5 @@ RUN pyenv global $PYTHON27_VERSION \
         $PYTHON38_VERSION \
         $PYPY3_VERSION
 
-RUN mkdir -p /root/storage
-WORKDIR /root/storage
+RUN mkdir /storage
+WORKDIR /storage
