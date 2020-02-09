@@ -8,7 +8,6 @@ This image include pyenv and tox.
 |Argument name   |default      |
 |----------------|-------------|
 |PYTHON27_VERSION|2.7.15       |
-|PYTHON33_VERSION|3.3.7        |
 |PYTHON34_VERSION|3.4.10       |
 |PYTHON35_VERSION|3.5.9        |
 |PYTHON36_VERSION|3.6.10       |
