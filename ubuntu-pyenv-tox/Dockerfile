@@ -6,11 +6,11 @@ MAINTAINER Sang-Heon Jeon "ekffu200098@gmail.com"
 # Install pyenv-virtualenv : https://github.com/pyenv/pyenv-virtualenv
 # Install tox : https://github.com/tox-dev/tox/
 ENV DEBIAN_FRONTEND=noninteractive
+ENV LANG="C.UTF-8"
+ENV LC_ALL="C.UTF-8"
 ENV HOME=/root
 ENV PYENV_ROOT=$HOME/.pyenv
 ENV PATH=$PYENV_ROOT/bin:$PATH
-ENV LC_ALL=C.UTF-8
-ENV LANG=C.UTF-8
 
 RUN apt-get update && apt-get install -y \
         ca-certificates make build-essential libssl1.0-dev \
@@ -26,7 +26,6 @@ RUN echo 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\n
 RUN echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
 
 ARG PYTHON27_VERSION=2.7.15
-ARG PYTHON33_VERSION=3.3.7
 ARG PYTHON34_VERSION=3.4.10
 ARG PYTHON35_VERSION=3.5.9
 ARG PYTHON36_VERSION=3.6.10
@@ -35,7 +34,6 @@ ARG PYTHON38_VERSION=3.8.1
 ARG PYPY3_VERSION=pypy3.6-7.3.0
 
 RUN pyenv install $PYTHON27_VERSION
-RUN pyenv install $PYTHON33_VERSION
 RUN pyenv install $PYTHON34_VERSION
 RUN pyenv install $PYTHON35_VERSION
 RUN pyenv install $PYTHON36_VERSION
@@ -43,14 +41,14 @@ RUN pyenv install $PYTHON37_VERSION
 RUN pyenv install $PYTHON38_VERSION
 RUN pyenv install $PYPY3_VERSION
 
-RUN pyenv global $PYTHON27_VERSION \ 
-        $PYTHON33_VERSION \
-        $PYTHON34_VERSION \
-        $PYTHON35_VERSION \
-        $PYTHON36_VERSION \
-        $PYTHON37_VERSION \
-        $PYTHON38_VERSION \
-        $PYPY3_VERSION
+RUN pyenv virtualenv -p python2.7 $PYTHON27_VERSION py27
+RUN pyenv virtualenv -p python3.4 $PYTHON34_VERSION py34
+RUN pyenv virtualenv -p python3.5 $PYTHON35_VERSION py35
+RUN pyenv virtualenv -p python3.6 $PYTHON36_VERSION py36
+RUN pyenv virtualenv -p python3.7 $PYTHON37_VERSION py37
+RUN pyenv virtualenv -p python3.8 $PYTHON38_VERSION py38
+
+RUN pyenv global py27 py34 py35 py36 py37 py38 $PYPY3_VERSION
 
 RUN mkdir /storage
 WORKDIR /storage
