@@ -5,12 +5,15 @@ MAINTAINER Sang-Heon Jeon "ekffu200098@gmail.com"
 # Install pyenv : https://github.com/pyenv/pyenv,
 # Install pyenv-virtualenv : https://github.com/pyenv/pyenv-virtualenv
 # Install tox : https://github.com/tox-dev/tox/
+# Related tortoise-orm : https://github.com/tortoise/tortoise-orm
+
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG="C.UTF-8"
 ENV LC_ALL="C.UTF-8"
 ENV HOME=/root
 ENV PYENV_ROOT=$HOME/.pyenv
 ENV PATH=$PYENV_ROOT/bin:$PATH
+ENV TORTOISE_HOME=/storage/tortoise-orm
 
 RUN apt-get update && apt-get install -y \
         ca-certificates make build-essential libssl1.0-dev \
@@ -25,30 +28,21 @@ RUN git clone https://github.com/pyenv/pyenv-virtualenv.git $PYENV_ROOT/plugins/
 RUN echo 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.bashrc
 RUN echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
 
-ARG PYTHON27_VERSION=2.7.15
-ARG PYTHON34_VERSION=3.4.10
-ARG PYTHON35_VERSION=3.5.9
 ARG PYTHON36_VERSION=3.6.10
 ARG PYTHON37_VERSION=3.7.6
 ARG PYTHON38_VERSION=3.8.1
 ARG PYPY3_VERSION=pypy3.6-7.3.0
 
-RUN pyenv install $PYTHON27_VERSION
-RUN pyenv install $PYTHON34_VERSION
-RUN pyenv install $PYTHON35_VERSION
 RUN pyenv install $PYTHON36_VERSION
 RUN pyenv install $PYTHON37_VERSION
 RUN pyenv install $PYTHON38_VERSION
 RUN pyenv install $PYPY3_VERSION
-
-RUN pyenv virtualenv -p python2.7 $PYTHON27_VERSION py27
-RUN pyenv virtualenv -p python3.4 $PYTHON34_VERSION py34
-RUN pyenv virtualenv -p python3.5 $PYTHON35_VERSION py35
 RUN pyenv virtualenv -p python3.6 $PYTHON36_VERSION py36
 RUN pyenv virtualenv -p python3.7 $PYTHON37_VERSION py37
 RUN pyenv virtualenv -p python3.8 $PYTHON38_VERSION py38
+RUN pyenv global py36 py37 py38 $PYPY3_VERSION
 
-RUN pyenv global py27 py34 py35 py36 py37 py38 $PYPY3_VERSION
-
-RUN mkdir /storage
-WORKDIR /storage
+RUN mkdir -p $TORTOISE_HOME
+COPY tortoise-orm $TORTOISE_HOME
+RUN cd $TORTOISE_HOME
+RUN make deps

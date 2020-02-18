@@ -1,0 +1,9 @@
+version: "3.1"
+services:
+  tortoise-orm:
+    container_name: tortoise-orm
+    build:
+      context: .
+    tty: true
+    volumes:
+      - ./:/storage
