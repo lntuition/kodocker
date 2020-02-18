@@ -4,3 +4,6 @@
 [submodule "pypika-docker/pypika"]
 	path = pypika-docker/pypika
 	url = https://github.com/lntuition/pypika
+[submodule "uftrace-docker/uftrace"]
+	path = uftrace-docker/uftrace
+	url = https://github.com/lntuition/uftrace
