@@ -1,3 +1,6 @@
 [submodule "tortoise-orm-wrapper/tortoise-orm"]
 	path = tortoise-orm-docker/tortoise-orm
 	url = https://github.com/lntuition/tortoise-orm
+[submodule "pypika-docker/pypika"]
+	path = pypika-docker/pypika
+	url = https://github.com/lntuition/pypika
