@@ -45,5 +45,3 @@ RUN pyenv global py36 py37 py38 $PYPY3_VERSION
 RUN mkdir -p $TORTOISE_HOME
 COPY tortoise-orm $TORTOISE_HOME
 WORKDIR $TORTOISE_HOME
-RUN which pip-sync > /dev/null || pip3 install -q pip-tools
-RUN pip-sync tests/requirements.txt
