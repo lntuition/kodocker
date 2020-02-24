@@ -22,5 +22,5 @@ $ docker-compose build
 5. Start with container
 ```console
 $ docker-compose up -d
-$ docker-compose exec tortoise-orm bash
+$ docker-compose exec pypika bash
 ```

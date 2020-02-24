@@ -12,5 +12,5 @@ $ docker-compose build
 4. Start with container
 ```console
 $ docker-compose up -d
-$ docker-compose exec tortoise-orm bash
+$ docker-compose exec uftrace bash
 ```
