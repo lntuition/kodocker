@@ -28,19 +28,14 @@ RUN git clone https://github.com/pyenv/pyenv-virtualenv.git $PYENV_ROOT/plugins/
 RUN echo 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.bashrc
 RUN echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
 
-ARG PYTHON36_VERSION=3.6.10
 ARG PYTHON37_VERSION=3.7.6
 ARG PYTHON38_VERSION=3.8.1
-ARG PYPY3_VERSION=pypy3.6-7.3.0
 
-RUN pyenv install $PYTHON36_VERSION
 RUN pyenv install $PYTHON37_VERSION
 RUN pyenv install $PYTHON38_VERSION
-RUN pyenv install $PYPY3_VERSION
-RUN pyenv virtualenv -p python3.6 $PYTHON36_VERSION py36
 RUN pyenv virtualenv -p python3.7 $PYTHON37_VERSION py37
 RUN pyenv virtualenv -p python3.8 $PYTHON38_VERSION py38
-RUN pyenv global py36 py37 py38 $PYPY3_VERSION
+RUN pyenv global py37 py38
 
 RUN mkdir -p $TORTOISE_HOME
 COPY tortoise-orm $TORTOISE_HOME
