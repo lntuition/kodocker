@@ -30,12 +30,15 @@ RUN echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
 
 ARG PYTHON37_VERSION=3.7.6
 ARG PYTHON38_VERSION=3.8.1
+ARG PYTHON39_VERSION=3.9-dev
 
 RUN pyenv install $PYTHON37_VERSION
 RUN pyenv install $PYTHON38_VERSION
+RUN pyenv install $PYTHON39_VERSION
 RUN pyenv virtualenv -p python3.7 $PYTHON37_VERSION py37
 RUN pyenv virtualenv -p python3.8 $PYTHON38_VERSION py38
-RUN pyenv global py37 py38
+RUN pyenv virtualenv -p python3.9 $PYTHON39_VERSION py39
+RUN pyenv global py37 py38 py39
 
 RUN mkdir -p $TORTOISE_HOME
 COPY tortoise-orm $TORTOISE_HOME
