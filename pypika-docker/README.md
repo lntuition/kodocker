@@ -12,6 +12,8 @@ This image is based on Ubuntu and including `pyenv` and `tox`.
 |PYTHON35_VERSION|3.5.9        |
 |PYTHON36_VERSION|3.6.10       |
 |PYTHON37_VERSION|3.7.6        |
+|PYTHON38_VERSION|3.8.1        |
+|PYTHON39_VERSION|3.9-dev      |
 |PYPY3_VERSION   |pypy3.6-7.3.0|
 
 4. Build image

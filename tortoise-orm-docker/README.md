@@ -11,6 +11,7 @@ This image is based on Ubuntu and including `pyenv` and `tox`.
 |----------------|-------------|
 |PYTHON37_VERSION|3.7.6        |
 |PYTHON38_VERSION|3.8.1        |
+|PYTHON39_VERSION|3.9-dev      |
 
 4. Build image
 ```console

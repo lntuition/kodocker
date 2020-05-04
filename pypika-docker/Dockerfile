@@ -31,16 +31,22 @@ RUN echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
 ARG PYTHON35_VERSION=3.5.9
 ARG PYTHON36_VERSION=3.6.10
 ARG PYTHON37_VERSION=3.7.6
+ARG PYTHON38_VERSION=3.8.1
+ARG PYTHON39_VERSION=3.9-dev
 ARG PYPY3_VERSION=pypy3.6-7.3.0
 
 RUN pyenv install $PYTHON35_VERSION
 RUN pyenv install $PYTHON36_VERSION
 RUN pyenv install $PYTHON37_VERSION
+RUN pyenv install $PYTHON38_VERSION
+RUN pyenv install $PYTHON39_VERSION
 RUN pyenv install $PYPY3_VERSION
 RUN pyenv virtualenv -p python3.5 $PYTHON35_VERSION py35
 RUN pyenv virtualenv -p python3.6 $PYTHON36_VERSION py36
 RUN pyenv virtualenv -p python3.7 $PYTHON37_VERSION py37
-RUN pyenv global py35 py36 py37 $PYPY3_VERSION
+RUN pyenv virtualenv -p python3.8 $PYTHON38_VERSION py38
+RUN pyenv virtualenv -p python3.9 $PYTHON39_VERSION py39
+RUN pyenv global py35 py36 py37 py38 py39 $PYPY3_VERSION
 
 RUN mkdir -p $PYPIKA_HOME
 COPY pypika $PYPIKA_HOME
